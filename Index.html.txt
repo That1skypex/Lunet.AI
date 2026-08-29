@@ -8,18 +8,19 @@
 <style>
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html, body {
-    margin: 0;
     width: 100%;
     height: 100%;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background: #212121;
-    color: white;
+    color: #fff;
     overflow: hidden;
 }
 
@@ -32,29 +33,39 @@ body {
 /* SIDEBAR */
 
 .sidebar {
-    width: 250px;
+    width: 260px;
+    height: 100vh;
     background: #171717;
     padding: 16px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 9px;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.logo-moon {
+    font-size: 25px;
 }
 
 .new-chat {
     width: 100%;
-    padding: 12px;
+    padding: 12px 14px;
     border: 1px solid #444;
     border-radius: 10px;
     background: #242424;
-    color: white;
+    color: #fff;
+    font-size: 14px;
+    text-align: left;
     cursor: pointer;
-    font-size: 15px;
 }
 
 .new-chat:hover {
@@ -63,29 +74,33 @@ body {
 
 .sidebar-bottom {
     margin-top: auto;
-    padding: 10px;
-    color: #999;
+    padding: 12px 10px;
+    color: #888;
+    font-size: 13px;
 }
 
 /* MAIN */
 
 .main {
-    flex: 1;
-    height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    min-width: 0;
 }
 
-/* TOP */
+/* TOP BAR */
 
 .topbar {
     height: 60px;
-    border-bottom: 1px solid #333;
+    min-height: 60px;
     display: flex;
     align-items: center;
     padding: 0 22px;
+    border-bottom: 1px solid #333;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* CHAT */
@@ -97,33 +112,37 @@ body {
 }
 
 .welcome {
+    max-width: 800px;
+    margin: 16vh auto 0;
     text-align: center;
-    margin-top: 18vh;
 }
 
-.moon {
-    font-size: 55px;
-    margin-bottom: 15px;
+.welcome-icon {
+    font-size: 58px;
+    margin-bottom: 18px;
 }
 
 .welcome h1 {
     font-size: 32px;
-    margin: 0 0 10px;
+    margin-bottom: 10px;
 }
 
 .welcome p {
     color: #999;
+    font-size: 15px;
 }
 
 /* MESSAGES */
 
 .messages {
+    width: 100%;
     max-width: 800px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .message {
     display: flex;
+    align-items: flex-start;
     gap: 12px;
     margin: 25px 0;
 }
@@ -132,18 +151,20 @@ body {
     width: 34px;
     height: 34px;
     min-width: 34px;
-    border-radius: 50%;
-    background: #303030;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    background: #303030;
+    font-size: 16px;
 }
 
-.text {
+.message-text {
     padding-top: 5px;
     line-height: 1.6;
     font-size: 15px;
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
 }
 
 /* LOADING */
@@ -152,28 +173,29 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    height: 30px;
+    height: 32px;
+    padding-top: 4px;
 }
 
-.loading span {
+.loading-dot {
     width: 7px;
     height: 7px;
-    background: #aaa;
     border-radius: 50%;
-    animation: bounce 1.2s infinite;
+    background: #aaa;
+    animation: loading 1.2s infinite ease-in-out;
 }
 
-.loading span:nth-child(2) {
-    animation-delay: .15s;
+.loading-dot:nth-child(2) {
+    animation-delay: 0.15s;
 }
 
-.loading span:nth-child(3) {
-    animation-delay: .3s;
+.loading-dot:nth-child(3) {
+    animation-delay: 0.3s;
 }
 
-@keyframes bounce {
+@keyframes loading {
     0%, 60%, 100% {
-        opacity: .3;
+        opacity: 0.25;
         transform: translateY(0);
     }
 
@@ -186,40 +208,44 @@ body {
 /* INPUT */
 
 .input-area {
-    position: fixed;
-    bottom: 0;
-    left: 250px;
+    position: absolute;
+    left: 0;
     right: 0;
+    bottom: 0;
     padding: 20px;
     background: linear-gradient(
+        to bottom,
         transparent,
         #212121 30%
     );
 }
 
 .input-box {
+    width: 100%;
     max-width: 800px;
-    margin: auto;
-    min-height: 55px;
-    background: #2f2f2f;
-    border: 1px solid #444;
-    border-radius: 16px;
+    min-height: 58px;
+    margin: 0 auto;
+    padding: 8px 9px 8px 14px;
     display: flex;
     align-items: flex-end;
-    padding: 8px;
+    background: #2f2f2f;
+    border: 1px solid #444;
+    border-radius: 17px;
 }
 
 textarea {
     flex: 1;
-    resize: none;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: white;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    padding: 10px;
+    width: 100%;
     max-height: 150px;
+    resize: none;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 9px 4px;
 }
 
 textarea::placeholder {
@@ -229,10 +255,12 @@ textarea::placeholder {
 .send {
     width: 38px;
     height: 38px;
-    border: none;
+    min-width: 38px;
+    margin-left: 8px;
+    border: 0;
     border-radius: 50%;
-    background: white;
-    color: black;
+    background: #fff;
+    color: #111;
     font-size: 20px;
     cursor: pointer;
 }
@@ -241,21 +269,32 @@ textarea::placeholder {
     transform: scale(1.05);
 }
 
+.send:active {
+    transform: scale(0.95);
+}
+
 /* MOBILE */
 
 @media (max-width: 700px) {
-
     .sidebar {
         display: none;
     }
 
-    .input-area {
-        left: 0;
-        padding: 12px;
+    .welcome {
+        margin-top: 13vh;
     }
 
     .welcome h1 {
         font-size: 27px;
+    }
+
+    .input-area {
+        padding: 12px;
+    }
+
+    .chat {
+        padding-left: 14px;
+        padding-right: 14px;
     }
 }
 </style>
@@ -268,7 +307,8 @@ textarea::placeholder {
     <aside class="sidebar">
 
         <div class="logo">
-            🌙 Lunet
+            <span class="logo-moon">🌙</span>
+            <span>Lunet</span>
         </div>
 
         <button class="new-chat" onclick="newChat()">
@@ -281,17 +321,21 @@ textarea::placeholder {
 
     </aside>
 
+
     <main class="main">
 
         <header class="topbar">
             Lunet
         </header>
 
+
         <section class="chat" id="chat">
 
             <div class="welcome" id="welcome">
 
-                <div class="moon">🌙✨</div>
+                <div class="welcome-icon">
+                    🌙✨
+                </div>
 
                 <h1>How can I help?</h1>
 
@@ -299,9 +343,11 @@ textarea::placeholder {
 
             </div>
 
+
             <div class="messages" id="messages"></div>
 
         </section>
+
 
         <div class="input-area">
 
@@ -311,9 +357,15 @@ textarea::placeholder {
                     id="input"
                     rows="1"
                     placeholder="Message Lunet..."
+                    aria-label="Message Lunet"
                 ></textarea>
 
-                <button class="send" onclick="sendMessage()">↑</button>
+                <button
+                    class="send"
+                    id="sendButton"
+                    onclick="sendMessage()"
+                    aria-label="Send message"
+                >↑</button>
 
             </div>
 
@@ -323,12 +375,16 @@ textarea::placeholder {
 
 </div>
 
+
 <script>
 
 const input = document.getElementById("input");
 const messages = document.getElementById("messages");
 const welcome = document.getElementById("welcome");
 const chat = document.getElementById("chat");
+
+
+/* ENTER TO SEND */
 
 input.addEventListener("keydown", function(event) {
 
@@ -342,6 +398,9 @@ input.addEventListener("keydown", function(event) {
 
 });
 
+
+/* AUTO RESIZE */
+
 input.addEventListener("input", function() {
 
     this.style.height = "auto";
@@ -351,11 +410,16 @@ input.addEventListener("input", function() {
 
 });
 
+
+/* SEND MESSAGE */
+
 function sendMessage() {
 
     const text = input.value.trim();
 
-    if (!text) return;
+    if (text === "") {
+        return;
+    }
 
     welcome.style.display = "none";
 
@@ -364,6 +428,7 @@ function sendMessage() {
     input.value = "";
     input.style.height = "auto";
 
+
     const loading = document.createElement("div");
 
     loading.className = "message";
@@ -371,10 +436,11 @@ function sendMessage() {
 
     loading.innerHTML = `
         <div class="avatar">🌙</div>
+
         <div class="loading">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
         </div>
     `;
 
@@ -382,31 +448,44 @@ function sendMessage() {
 
     scrollBottom();
 
+
     setTimeout(function() {
 
         loading.remove();
 
-        addMessage(getResponse(text), false);
+        const response = getResponse(text);
+
+        addMessage(response, false);
 
     }, 1000);
 
 }
 
-function addMessage(text, user) {
+
+/* ADD MESSAGE */
+
+function addMessage(text, isUser) {
 
     const message = document.createElement("div");
 
     message.className = "message";
 
-    message.innerHTML = `
-        <div class="avatar">
-            ${user ? "🙂" : "🌙"}
-        </div>
+    const avatar = document.createElement("div");
 
-        <div class="text"></div>
-    `;
+    avatar.className = "avatar";
 
-    message.querySelector(".text").textContent = text;
+    avatar.textContent = isUser ? "🙂" : "🌙";
+
+
+    const messageText = document.createElement("div");
+
+    messageText.className = "message-text";
+
+    messageText.textContent = text;
+
+
+    message.appendChild(avatar);
+    message.appendChild(messageText);
 
     messages.appendChild(message);
 
@@ -414,9 +493,13 @@ function addMessage(text, user) {
 
 }
 
+
+/* BASIC LUNET BRAIN */
+
 function getResponse(text) {
 
     const t = text.toLowerCase();
+
 
     if (
         t.includes("hello") ||
@@ -426,6 +509,7 @@ function getResponse(text) {
         return "Hey! 👋 I'm Lunet. What are we working on?";
     }
 
+
     if (
         t.includes("who are you") ||
         t.includes("what are you")
@@ -433,24 +517,40 @@ function getResponse(text) {
         return "I'm Lunet 🌙✨ — your AI assistant.";
     }
 
-    if (t.includes("how are you")) {
-        return "I'm doing great! 🤖✨";
-    }
 
     if (t.includes("your name")) {
         return "My name is Lunet. 🌙";
     }
 
-    if (t.includes("thank")) {
+
+    if (t.includes("how are you")) {
+        return "I'm doing great! 🤖✨";
+    }
+
+
+    if (
+        t.includes("thank") ||
+        t.includes("thanks")
+    ) {
         return "You're welcome! 😊";
     }
+
 
     if (t.includes("bye")) {
         return "See you later! 🌙";
     }
 
-    return "I'm still learning! 🧠✨";
+
+    if (t.includes("help")) {
+        return "Of course! Tell me what you need help with. 🧠";
+    }
+
+
+    return "I'm still learning! 🧠✨ We can make my brain much smarter next.";
 }
+
+
+/* NEW CHAT */
 
 function newChat() {
 
@@ -458,9 +558,16 @@ function newChat() {
 
     welcome.style.display = "block";
 
+    input.value = "";
+
+    input.style.height = "auto";
+
     input.focus();
 
 }
+
+
+/* SCROLL */
 
 function scrollBottom() {
 
