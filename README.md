@@ -1,2 +1,2 @@
 # Lunet.AI
-AI made by AI
+Your Mini Model
